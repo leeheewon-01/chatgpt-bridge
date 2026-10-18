@@ -33,8 +33,20 @@ after(async () => {
     await s.send('Browser.close').catch(() => {});
   } catch {}
   fake.close();
-  // Chrome keeps flushing its profile for a moment after Browser.close.
-  fs.rmSync(tmp, { recursive: true, force: true, maxRetries: 20, retryDelay: 250 });
+  // Chrome keeps flushing its profile for a moment after Browser.close; wait for it to go away.
+  for (let i = 0; i < 40; i++) {
+    const alive = await fetch(`http://127.0.0.1:${process.env.CHATGPT_BRIDGE_PORT}/json/version`)
+      .then(() => true)
+      .catch(() => false);
+    if (!alive) break;
+    await new Promise((r) => setTimeout(r, 250));
+  }
+  try {
+    fs.rmSync(tmp, { recursive: true, force: true, maxRetries: 40, retryDelay: 250 });
+  } catch (err) {
+    // A leftover temp dir is harmless; don't fail the suite over it.
+    console.error(`could not remove ${tmp}: ${err.message}`);
+  }
   setTimeout(() => process.exit(), 100);
 });
 
