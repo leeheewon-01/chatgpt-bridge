@@ -158,11 +158,14 @@ const REFS = [
   { matched_text: C2, type: 'grouped_webpages', items: [{ title: 'Source A', url: 'https://a.example/x' }], safe_urls: [] },
   { matched_text: ' ', type: 'sources_footnote', items: [], safe_urls: [] },
 ];
+const PLAN_MS = 5000;
+const DONE_MS = 8000;
 function state() {
+  // Long enough phases that a slow CI machine still sees each one.
   const t = Date.now() - start;
-  if (t < 2000) return { plan, status: 'waiting_for_user_response_on_plan', waiting_for_user_response_on_plan_until: new Date(start + 2000).toISOString() };
-  if (t < 6000) return { plan, status: 'in_progress', research_started_at: new Date(start + 2000).toISOString() };
-  return { plan, status: 'completed', research_started_at: new Date(start + 2000).toISOString(), research_stopped_at: new Date(start + 6000).toISOString(),
+  if (t < PLAN_MS) return { plan, status: 'waiting_for_user_response_on_plan', waiting_for_user_response_on_plan_until: new Date(start + PLAN_MS).toISOString() };
+  if (t < DONE_MS) return { plan, status: 'in_progress', research_started_at: new Date(start + PLAN_MS).toISOString() };
+  return { plan, status: 'completed', research_started_at: new Date(start + PLAN_MS).toISOString(), research_stopped_at: new Date(start + DONE_MS).toISOString(),
     report_message: { status: 'finished_successfully', content: { content_type: 'text', parts: [REPORT] }, metadata: { content_references: REFS } } };
 }
 window.openai = { get widgetState() { return state(); }, toolResponseMetadata: { websocket_url: 'wss://secret.invalid' } };
