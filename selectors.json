@@ -1,0 +1,169 @@
+{
+  "_doc": "ChatGPT UI knowledge. Each key lists candidates tried in order; the first one with a visible match wins. A string is a CSS selector. An object is {css, label, hidden}: css narrows the elements (default: buttons, menu items, links), label is a case-insensitive regex tested against aria-label, title and visible text, hidden:true allows invisible matches. The bridge re-reads this file on every call, so edits apply without a restart. Run `chatgpt-bridge inspect` to see what the current page offers. Model choice (2026 UI): one model with a 'power' slider in the model menu (Instant, Medium, High, Extra High, Pro), plus version radio items (Latest, older models). Deep research is an app-mention token inserted into the composer.",
+  "composer": [
+    "[role='textbox'][contenteditable='true'][data-composer-markdown]",
+    "#prompt-textarea",
+    "[role='textbox'][contenteditable='true']",
+    "#mobile-composer-prompt",
+    "form [contenteditable='true']",
+    "form textarea"
+  ],
+  "sendButton": [
+    "#lightweight-composer-send",
+    "[data-testid='send-button']",
+    "#composer-submit-button",
+    {
+      "css": "button",
+      "label": "^(보내기|메시지 보내기|프롬프트 보내기|send prompt|send message|send)$"
+    }
+  ],
+  "stopButton": [
+    "#lightweight-composer-stop",
+    "#lightweight-conversation-stop",
+    "[data-testid='stop-button']",
+    {
+      "css": "button",
+      "label": "^(중지|응답 중지|생성 중지|스트리밍 중지|리서치 중지|stop|stop streaming|stop generating|stop research)$"
+    }
+  ],
+  "busyIndicator": [
+    "#lightweight-conversation-spinner"
+  ],
+  "addMenuButton": [
+    "#lightweight-composer-add-attachment",
+    "[data-testid='composer-plus-btn']",
+    {
+      "css": "button",
+      "label": "^(파일 등 추가|파일 및 기타 추가|사진 및 파일 추가|add files and more|add photos and files|add photos & files)$"
+    }
+  ],
+  "addFilesMenuItem": [
+    "#lightweight-composer-actions-add-files",
+    {
+      "css": "button, [role='menuitem']",
+      "label": "^(사진 및 파일 추가|파일 추가|add photos (&|and) files|add files)( |$)"
+    }
+  ],
+  "fileInput": [
+    {
+      "css": "input[type='file'][aria-label='파일 첨부']",
+      "hidden": true
+    },
+    {
+      "css": "input[type='file'][aria-label='Attach files'], input[type='file'][aria-label='Attach file']",
+      "hidden": true
+    },
+    {
+      "css": "input[type='file']:not([accept])",
+      "hidden": true
+    },
+    {
+      "css": "input[type='file'][accept='']",
+      "hidden": true
+    }
+  ],
+  "deepResearchMenuItem": [
+    "#lightweight-composer-actions-deep-research",
+    {
+      "css": "button, [role='menuitem']",
+      "label": "^(심층 리서치|deep research)( |$)"
+    }
+  ],
+  "deepResearchToken": [
+    {
+      "css": "[role='textbox'] [app-mention-path*='deep_research']",
+      "hidden": true
+    },
+    {
+      "css": "[role='textbox'] [contenteditable='false']",
+      "label": "^(심층 리서치|deep research)$",
+      "hidden": true
+    }
+  ],
+  "deepResearchAppFrame": [
+    "web-sandbox.oaiusercontent.com"
+  ],
+  "modelSwitcher": [
+    "button[aria-label='ChatGPT 모델 선택']",
+    "[data-testid='model-switcher-dropdown-button']",
+    {
+      "css": "button",
+      "label": "(모델 선택|model selector|select model|switch model|choose model)"
+    }
+  ],
+  "powerSlider": [
+    {
+      "css": "[role='menu'] [role='slider']",
+      "hidden": true
+    }
+  ],
+  "powerStatus": [
+    {
+      "css": "[role='menu'] [role='status']",
+      "hidden": true
+    }
+  ],
+  "modelVersionItem": [
+    "[role='menu'] [role='menuitemradio']"
+  ],
+  "transcript": [
+    "main[data-app-shell-main-surface]",
+    "#octane-conversation-transcript",
+    "main"
+  ],
+  "userMessage": [
+    "[data-chatgpt-search-unit-key$=':user']",
+    "[data-content-search-unit-key$=':user']",
+    "[data-message-author-role='user']",
+    "[data-turn='user']"
+  ],
+  "assistantMessage": [
+    "[data-chatgpt-search-unit-key$=':assistant']",
+    "[data-content-search-unit-key$=':assistant']",
+    "[data-message-author-role='assistant']",
+    "[data-turn='assistant']"
+  ],
+  "messageContent": [
+    "[data-markdown-text-style='assistant-message']",
+    ".markdown",
+    ".prose"
+  ],
+  "copyButton": [
+    "[data-testid='copy-turn-action-button']",
+    {
+      "css": "button",
+      "label": "^(복사|응답 복사|copy|copy response)$"
+    }
+  ],
+  "loginButton": [
+    "[data-testid='login-button']",
+    {
+      "css": "button, a",
+      "label": "^(로그인|log in)$"
+    }
+  ],
+  "stripFromContent": "button, svg, [role='button'], [aria-hidden='true'], [data-testid*='action'], script, style, noscript",
+  "errorPattern": "문제가 발생했습니다|오류가 발생했습니다|네트워크 오류|something went wrong|an error occurred|network error",
+  "challengePattern": "just a moment|잠시만 기다리|verify you are human|사람인지 확인",
+  "modes": {
+    "default": {},
+    "instant": {
+      "power": "Instant"
+    },
+    "medium": {
+      "power": "Medium"
+    },
+    "high": {
+      "power": "High"
+    },
+    "extra_high": {
+      "power": "Extra High"
+    },
+    "pro": {
+      "power": "Pro"
+    },
+    "deep_research": {
+      "deepResearch": true
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "chatgpt-bridge",
+  "owner": { "name": "Heewon Lee", "url": "https://github.com/leeheewon-01" },
+  "metadata": {
+    "description": "Ask ChatGPT (GPT-6 Pro, Deep research) from Claude Code with local files, using your own ChatGPT subscription."
+  },
+  "plugins": [
+    {
+      "name": "chatgpt-bridge",
+      "source": "./",
+      "description": "Drive chatgpt.com in a dedicated Chrome profile: pick Pro or Deep research, upload files, wait, and save the answer as Markdown.",
+      "category": "productivity"
+    }
+  ]
+}

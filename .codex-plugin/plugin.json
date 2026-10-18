@@ -1,0 +1,22 @@
+{
+  "name": "chatgpt-bridge",
+  "version": "0.1.0",
+  "description": "Send prompts and local files to chatgpt.com (GPT-6 Pro, Deep research) and get the answers back as Markdown, using your own ChatGPT subscription.",
+  "author": { "name": "Heewon Lee", "url": "https://github.com/leeheewon-01" },
+  "homepage": "https://github.com/leeheewon-01/chatgpt-bridge",
+  "repository": "https://github.com/leeheewon-01/chatgpt-bridge",
+  "license": "MIT",
+  "keywords": ["chatgpt", "gpt-6-pro", "deep-research", "mcp", "browser-automation", "claude-code"],
+  "skills": "./skills/",
+  "mcpServers": "./.codex-plugin/mcp.json",
+  "interface": {
+    "displayName": "ChatGPT Bridge",
+    "shortDescription": "Ask ChatGPT Pro or Deep research with local files and save the answer as Markdown.",
+    "longDescription": "Drives chatgpt.com in a dedicated Chrome profile with your own ChatGPT subscription: picks the power level or Deep research, uploads files, waits for long answers and saves them as Markdown with code, tables, math and source links. The same MCP server also works in Claude Code.",
+    "developerName": "Heewon Lee",
+    "category": "Productivity",
+    "capabilities": [],
+    "websiteURL": "https://github.com/leeheewon-01/chatgpt-bridge",
+    "defaultPrompt": ["Send this file to ChatGPT Pro for review and save the answer under research/."]
+  }
+}

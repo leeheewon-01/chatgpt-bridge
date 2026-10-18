@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "chatgpt_bridge": {
+      "command": "node",
+      "args": ["./scripts/start.mjs"],
+      "cwd": ".",
+      "startup_timeout_sec": 180,
+      "tool_timeout_sec": 1600
+    }
+  }
+}
